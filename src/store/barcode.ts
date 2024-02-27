@@ -14,18 +14,10 @@ export const useBarStore = defineStore('barStore', () => {
         toast[type](message);
     }
 
-    const isOpen = ref<boolean>(false)
-
-    const setOpen = () => {
-        isOpen.value=!isOpen.value
-    }
-
     return {
         codebar,
         codeHistory,
         showToast,
         rawCode,
-        isOpen,
-        setOpen
     }
 })
