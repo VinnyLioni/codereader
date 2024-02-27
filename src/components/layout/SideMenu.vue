@@ -3,6 +3,15 @@
     import sideMenuOption from '../custom/sideMenuOption.vue'
 
     const app = appStore()
+
+    const newRoute = () => {
+        window.open('https://vini-portfoil.web.app/')
+    }
+
+    const wpp = () => {
+        window.open('https://api.whatsapp.com/send?phone=5511981080308&text=Ol%C3%A1,%20gostaria%20de%20saber%20sobre%20o%20leitor', '_blank')
+    }
+
 </script>
 
 <template>
@@ -12,11 +21,11 @@
                 <span class="text-2xl font-extrabold tracking-tight text-slate-100">Code</span>
                 <span class="text-md font-bold tracking-tighter text-slate-400">Reader</span>
             </header>
-            <main class="w-full flex justify-center flex-col mt-10"> 
-                <sideMenuOption title="Retornar para Portfólio" icon="fas fa-angle-left"/>
+            <main class="w-full flex justify-center flex-col mt-10 gap-2"> 
+                <sideMenuOption title="Retornar para Portfólio" icon="fas fa-angle-left" @click="newRoute"/>
+                <sideMenuOption title="Entre em contato comigo" icon="fab fa-whatsapp" @click="wpp"/>
             </main>
             <footer class="mt-auto">
-
             </footer>
         </aside>
     </transition>
