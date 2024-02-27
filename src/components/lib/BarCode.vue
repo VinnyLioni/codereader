@@ -185,7 +185,7 @@
 
 <template>
     <div class="flex flex-col justify-center items-center">
-        <div class="relative min-w-80 max-w-80 min-h-96 max-h-96 my-10 overflow-hidden rounded-md border-slate-100 border-[0.25rem]">
+        <div class="relative min-w-[23rem] max-w-full min-h-96 max-h-96 mt-1 overflow-hidden rounded-md border-slate-100 border-[2px]">
             <QrcodeStream 
                 :constraints="{ deviceId: selectedDevice.deviceId, facingMode}"
                 :track="trackFunctionSelected.value"
@@ -199,18 +199,42 @@
             </button>
         </div>
     </div>
-    <table class="border-slate-100 border-[0.1rem] rounded-lg w-[95%] h-auto">
-        <thead class="text-slate-900 bg-slate-100">
-            <tr class="text-md font-semibold tracking-tighter">
-                <th class="w-10/12 text-center">Código</th>
-                <th class="w-2/12 text-center">Tipo</th>
-            </tr>
-        </thead>
-        <tbody class="text-slate-100">
-            <tr v-for="(item, index) in barStore.codeHistory" :key="index" class="py-2 px-12">
-                <td class="text-xs tracking-tighter w-10/12 p-1 border-r-[0.1rem]">{{ item.rawValue }}</td>
-                <td class="text-xs w-2/12 text-center">{{ item.format }}</td>
-            </tr>
-        </tbody>
-    </table>
+    <div class="">
+        <!-- <table class="border-slate-100 border-[0.1rem] w-[23rem] h-auto">
+            <thead class="text-slate-900 bg-slate-100">
+                <tr class="text-md font-semibold tracking-tighter">
+                    <th class="w-10/12 text-center">Código</th>
+                    <th class="w-2/12 text-center">Tipo</th>
+                </tr>
+            </thead>
+            <tbody class="text-slate-100 w-full flex flex-col">
+                <tr v-if="barStore.codeHistory.length <= 0" class="text-xs flex justify-center">
+                    <td class="p-1 w-10/12">Não há códigos detectados.</td>
+                    <td class="p-1 w-2/12"></td>
+                </tr>
+                <tr v-else v-for="(item, index) in barStore.codeHistory" :key="index" class="py-2 px-12">
+                    <td class="text-xs tracking-tighter w-10/12 p-1 border-r-[0.1rem]">{{ item.rawValue }}</td>
+                    <td class="text-xs w-2/12 text-center">{{ item.format }}</td>
+                </tr>
+            </tbody>
+        </table> -->
+        <table class="w-[23rem] mt-1">
+            <thead class="w-full flex">
+                <tr class="w-full bg-slate-100 text-slate-900 rounded-tr-md rounded-tl-md py-2 flex justify-center">
+                    <!-- <th class="mr-auto w-2/12">Seq.</th> -->
+                    <th class="w-10/12 text-sm">Códigos</th>
+                    <th class="w-2/12 text-sm">Tipo</th>
+                </tr>
+            </thead>
+            <tbody class="full flex flex-col border-solid border-slate-100 border-[2px] rounded-bl-md rounded-br-md">
+                <tr v-if="barStore.codeHistory.length <= 0" class="flex justify-center text-xs text-slate-100 py-2">
+                    <td>Nenhuma leitura feita.</td>
+                </tr>
+                <tr v-else v-for="(item, index) in barStore.codeHistory" :key="index" class="flex justify-start duration-200 ease-in" :class="newCodeInserted && index === 0 ? 'bg-green-600 text-slate-100' : ''">
+                    <td class="text-xs px-4 py-2 border-t-2 w-full">{{ item.rawValue }}</td>
+                    <td class="text-xs px-4 py-2 border-t-2 w-full">{{ item.format }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </template>
