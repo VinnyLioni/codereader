@@ -4,7 +4,7 @@
 </script>
 
 <template>
-    <main class="w-full h-full flex flex-col justify-center items-center">
+    <main class="w-full h-full flex sm:flex-row flex-col justify-center items-center sm:items-start sm:py-6">
         <BarCode />
         <!-- <Table /> -->
     </main>

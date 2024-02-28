@@ -2,6 +2,7 @@
     import { ref, computed, onMounted } from 'vue'
     import { QrcodeStream  } from 'vue-qrcode-reader'
     import { useBarStore } from '../../store/barcode'
+    import sideMenuOption from '../custom/sideMenuOption.vue';
 
     const barStore = useBarStore()
 
@@ -180,11 +181,20 @@
         }
     }
 
+    const newRoute = () => {
+        window.open('https://vini-portfoil.web.app/')
+    }
+
+    const wpp = () => {
+        window.open('https://api.whatsapp.com/send?phone=5511981080308&text=Ol%C3%A1,%20gostaria%20de%20saber%20sobre%20o%20leitor', '_blank')
+    }
+
+
 </script>
 
 <template>
     <div class="flex flex-col justify-center items-center">
-        <div class="shadow-md shadow-slate-950 relative min-w-[22rem] max-w-[22rem] mx-1 min-h-96 max-h-96 mt-1 overflow-hidden rounded-md border-slate-100 border-[2px]">
+        <div class="shadow-md shadow-slate-950 relative min-w-[21.5rem] max-w-[21.5rem] sm:min-w-[30rem] mx-1 min-h-96 max-h-96 sm:min-h-[40rem] sm:max-h-[40rem] mt-1 overflow-hidden rounded-md border-slate-600 border-[0.2rem]">
             <QrcodeStream 
                 :constraints="{ deviceId: selectedDevice.deviceId, facingMode}"
                 :track="trackFunctionSelected.value"
@@ -193,21 +203,25 @@
                 @detect="onDetect"
                 v-if="selectedDevice !== null"
             />
-            <button @click="switchCamera" class="rounded-full bg-slate-100 w-10 h-10 p-6 absolute right-6 top-6 flex justify-center items-center">
+            <button @click="switchCamera" class="rounded-full bg-slate-400 w-10 h-10 p-6 absolute right-6 top-6 flex justify-center items-center">
                 <i class="fas fa-camera-rotate text-slate-900 text-2xl"></i>
             </button>
         </div>
     </div>
-    <div class="p-2 w-[23rem] flex flex-col gap-2">
+    <div class="p-2 w-[22.5rem] flex flex-col gap-2">
         <div class="w-full flex flex-col rounded-md shadow-md shadow-slate-950">
-            <span class="bg-slate-100 px-2 font-semibold text-lg rounded-tr-md rounded-tl-md text-center">Código Identificado</span>
-            <div v-if="!barStore.codebar" class="text-slate-100 py-2 text-md tracking-tighter text-center border-[0.1rem] rounded-br-md rounded-bl-md">Aguardando leitura.</div>
-            <div v-else class="text-slate-100 py-2 text-sm tracking-tighter text-center border-[0.1rem] rounded-br-md rounded-bl-md" :class="newCodeInserted ? 'bg-green-600 text-slate-100' : ''">{{ barStore.codebar.rawValue }}</div>
+            <span class="bg-slate-600 px-2 font-semibold text-lg rounded-tr-md rounded-tl-md text-center text-slate-100">Código Identificado</span>
+            <div v-if="!barStore.codebar" class="text-slate-100 py-2 text-md tracking-tighter text-center border-[0.2rem] border-slate-600 rounded-br-md rounded-bl-md">Aguardando leitura.</div>
+            <div v-else class="text-slate-100 py-2 text-sm tracking-tighter text-center border-[0.2rem] rounded-br-md rounded-bl-md border-slate-600" :class="newCodeInserted ? 'bg-green-600 text-slate-100' : ''">{{ barStore.codebar.rawValue }}</div>
         </div>
         <div class="w-full flex flex-col rounded-md shadow-md shadow-slate-950">
-            <span class="bg-slate-100 px-2 font-semibold text-lg rounded-tr-md rounded-tl-md text-center">Formato do Código</span>
-            <div v-if="!barStore.codebar" class="text-slate-100 py-2 tracking-tighter text-center border-[0.1rem] rounded-bl-md rounded-br-md" :class="newCodeInserted ? 'bg-green-600 text-slate-100' : ''">Aguardando leitura.</div>
-            <div v-else class="text-slate-100 py-2 tracking-tighter text-center border-[0.1rem] rounded-bl-md rounded-br-md" :class="newCodeInserted ? 'bg-green-600 text-slate-100' : ''">{{ barStore.codebar.format }}</div>
+            <span class="bg-slate-600 px-2 font-semibold text-lg rounded-tr-md rounded-tl-md text-center text-slate-100">Formato do Código</span>
+            <div v-if="!barStore.codebar" class="text-slate-100 py-2 tracking-tighter text-center border-[0.2rem] rounded-bl-md rounded-br-md border-slate-600" :class="newCodeInserted ? 'bg-green-600 text-slate-100' : ''">Aguardando leitura.</div>
+            <div v-else class="text-slate-100 py-2 tracking-tighter text-center border-[0.2rem] rounded-bl-md rounded-br-md border-slate-600" :class="newCodeInserted ? 'bg-green-600 text-slate-100' : ''">{{ barStore.codebar.format }}</div>
+        </div>
+        <div class="hidden sm:flex flex-row gap-2 mt-auto">
+            <sideMenuOption title="Portfólio" icon="fas fa-angle-left text-slate-100" @click="newRoute" custom="text-sm text-center px-6 bg-slate-600" text="text-slate-100"/>
+            <sideMenuOption title="Contato" icon="fab fa-whatsapp text-slate-100" @click="wpp" custom="text-sm text-center px-6 bg-slate-600" text="text-slate-100"/>
         </div>
     </div>
 </template>

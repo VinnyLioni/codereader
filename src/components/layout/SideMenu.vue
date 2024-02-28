@@ -16,14 +16,14 @@
 
 <template>
     <transition name="slide-fade">
-        <aside class="fixed w-5/6 text-slate-100 flex flex-col p-6 h-screen z-20 shadow-2xl bg-slate-800" v-show="app.isOpen">
+        <aside class="sm:hidden fixed w-5/6 text-slate-100 flex flex-col p-6 h-screen z-20 shadow-2xl bg-slate-800" v-show="app.isOpen">
             <header class="flex flex-row items-baseline">
                 <span class="text-2xl font-extrabold tracking-tight text-slate-100">Code</span>
                 <span class="text-md font-bold tracking-tighter text-slate-400">Reader</span>
             </header>
             <main class="w-full flex justify-center flex-col mt-10 gap-2"> 
-                <sideMenuOption title="Retornar para Portfólio" icon="fas fa-angle-left" @click="newRoute"/>
-                <sideMenuOption title="Entre em contato comigo" icon="fab fa-whatsapp" @click="wpp"/>
+                <sideMenuOption title="Portfólio" icon="fas fa-angle-left text-slate-100" @click="newRoute" custom="bg-slate-600" text="text-slate-100"/>
+                <sideMenuOption title="Contato" icon="fab fa-whatsapp text-slate-100" @click="wpp" custom="bg-slate-600" text="text-slate-100"/>
             </main>
             <footer class="mt-auto">
             </footer>
